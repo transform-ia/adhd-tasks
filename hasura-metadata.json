@@ -1,0 +1,530 @@
+{
+  "type": "bulk",
+  "args": [
+    {
+      "type": "pg_track_table",
+      "args": {
+        "source": "default",
+        "table": "users"
+      }
+    },
+    {
+      "type": "pg_track_table",
+      "args": {
+        "source": "default",
+        "table": "locations"
+      }
+    },
+    {
+      "type": "pg_track_table",
+      "args": {
+        "source": "default",
+        "table": "time_windows"
+      }
+    },
+    {
+      "type": "pg_track_table",
+      "args": {
+        "source": "default",
+        "table": "weather_conditions"
+      }
+    },
+    {
+      "type": "pg_track_table",
+      "args": {
+        "source": "default",
+        "table": "tasks"
+      }
+    },
+    {
+      "type": "pg_track_table",
+      "args": {
+        "source": "default",
+        "table": "task_dependencies"
+      }
+    },
+    {
+      "type": "pg_track_table",
+      "args": {
+        "source": "default",
+        "table": "recurring_schedules"
+      }
+    },
+    {
+      "type": "pg_track_table",
+      "args": {
+        "source": "default",
+        "table": "task_assignments"
+      }
+    },
+    {
+      "type": "pg_track_table",
+      "args": {
+        "source": "default",
+        "table": "blockers"
+      }
+    },
+    {
+      "type": "pg_track_table",
+      "args": {
+        "source": "default",
+        "table": "task_history"
+      }
+    },
+    {
+      "type": "pg_track_table",
+      "args": {
+        "source": "default",
+        "table": "task_categories"
+      }
+    },
+    {
+      "type": "pg_track_table",
+      "args": {
+        "source": "default",
+        "table": "task_category_assignments"
+      }
+    },
+    {
+      "type": "pg_track_table",
+      "args": {
+        "source": "default",
+        "table": "eligible_tasks",
+        "configuration": {
+          "custom_root_fields": {},
+          "column_config": {}
+        }
+      }
+    },
+    {
+      "type": "pg_track_table",
+      "args": {
+        "source": "default",
+        "table": "active_assignments",
+        "configuration": {
+          "custom_root_fields": {},
+          "column_config": {}
+        }
+      }
+    },
+    {
+      "type": "pg_track_table",
+      "args": {
+        "source": "default",
+        "table": "user_task_stats",
+        "configuration": {
+          "custom_root_fields": {},
+          "column_config": {}
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "default",
+        "table": "tasks",
+        "name": "location",
+        "using": {
+          "foreign_key_constraint_on": "location_id"
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "default",
+        "table": "tasks",
+        "name": "time_window",
+        "using": {
+          "foreign_key_constraint_on": "time_window_id"
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "default",
+        "table": "tasks",
+        "name": "weather_condition",
+        "using": {
+          "foreign_key_constraint_on": "weather_condition_id"
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "default",
+        "table": "tasks",
+        "name": "creator",
+        "using": {
+          "foreign_key_constraint_on": "created_by"
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "default",
+        "table": "tasks",
+        "name": "completed_by_user",
+        "using": {
+          "foreign_key_constraint_on": "completed_by"
+        }
+      }
+    },
+    {
+      "type": "pg_create_array_relationship",
+      "args": {
+        "source": "default",
+        "table": "tasks",
+        "name": "dependencies",
+        "using": {
+          "foreign_key_constraint_on": {
+            "table": "task_dependencies",
+            "column": "task_id"
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_array_relationship",
+      "args": {
+        "source": "default",
+        "table": "tasks",
+        "name": "dependent_tasks",
+        "using": {
+          "foreign_key_constraint_on": {
+            "table": "task_dependencies",
+            "column": "depends_on_task_id"
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_array_relationship",
+      "args": {
+        "source": "default",
+        "table": "tasks",
+        "name": "blockers",
+        "using": {
+          "foreign_key_constraint_on": {
+            "table": "blockers",
+            "column": "task_id"
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_array_relationship",
+      "args": {
+        "source": "default",
+        "table": "tasks",
+        "name": "history",
+        "using": {
+          "foreign_key_constraint_on": {
+            "table": "task_history",
+            "column": "task_id"
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_array_relationship",
+      "args": {
+        "source": "default",
+        "table": "tasks",
+        "name": "category_assignments",
+        "using": {
+          "foreign_key_constraint_on": {
+            "table": "task_category_assignments",
+            "column": "task_id"
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_array_relationship",
+      "args": {
+        "source": "default",
+        "table": "tasks",
+        "name": "recurring_schedules",
+        "using": {
+          "foreign_key_constraint_on": {
+            "table": "recurring_schedules",
+            "column": "task_id"
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "default",
+        "table": "task_dependencies",
+        "name": "task",
+        "using": {
+          "foreign_key_constraint_on": "task_id"
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "default",
+        "table": "task_dependencies",
+        "name": "depends_on_task",
+        "using": {
+          "foreign_key_constraint_on": "depends_on_task_id"
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "default",
+        "table": "recurring_schedules",
+        "name": "task",
+        "using": {
+          "foreign_key_constraint_on": "task_id"
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "default",
+        "table": "recurring_schedules",
+        "name": "time_window",
+        "using": {
+          "foreign_key_constraint_on": "time_window_id"
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "default",
+        "table": "task_assignments",
+        "name": "user",
+        "using": {
+          "foreign_key_constraint_on": "user_id"
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "default",
+        "table": "task_assignments",
+        "name": "task",
+        "using": {
+          "foreign_key_constraint_on": "task_id"
+        }
+      }
+    },
+    {
+      "type": "pg_create_array_relationship",
+      "args": {
+        "source": "default",
+        "table": "users",
+        "name": "assignments",
+        "using": {
+          "foreign_key_constraint_on": {
+            "table": "task_assignments",
+            "column": "user_id"
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_array_relationship",
+      "args": {
+        "source": "default",
+        "table": "users",
+        "name": "created_tasks",
+        "using": {
+          "foreign_key_constraint_on": {
+            "table": "tasks",
+            "column": "created_by"
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_array_relationship",
+      "args": {
+        "source": "default",
+        "table": "users",
+        "name": "completed_tasks",
+        "using": {
+          "foreign_key_constraint_on": {
+            "table": "tasks",
+            "column": "completed_by"
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_array_relationship",
+      "args": {
+        "source": "default",
+        "table": "users",
+        "name": "history",
+        "using": {
+          "foreign_key_constraint_on": {
+            "table": "task_history",
+            "column": "user_id"
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "default",
+        "table": "blockers",
+        "name": "task",
+        "using": {
+          "foreign_key_constraint_on": "task_id"
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "default",
+        "table": "blockers",
+        "name": "creator",
+        "using": {
+          "foreign_key_constraint_on": "created_by"
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "default",
+        "table": "task_history",
+        "name": "task",
+        "using": {
+          "foreign_key_constraint_on": "task_id"
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "default",
+        "table": "task_history",
+        "name": "user",
+        "using": {
+          "foreign_key_constraint_on": "user_id"
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "default",
+        "table": "task_history",
+        "name": "blocker",
+        "using": {
+          "foreign_key_constraint_on": "blocker_id"
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "default",
+        "table": "task_category_assignments",
+        "name": "task",
+        "using": {
+          "foreign_key_constraint_on": "task_id"
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "default",
+        "table": "task_category_assignments",
+        "name": "category",
+        "using": {
+          "foreign_key_constraint_on": "category_id"
+        }
+      }
+    },
+    {
+      "type": "pg_create_array_relationship",
+      "args": {
+        "source": "default",
+        "table": "task_categories",
+        "name": "task_assignments",
+        "using": {
+          "foreign_key_constraint_on": {
+            "table": "task_category_assignments",
+            "column": "category_id"
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_array_relationship",
+      "args": {
+        "source": "default",
+        "table": "locations",
+        "name": "tasks",
+        "using": {
+          "foreign_key_constraint_on": {
+            "table": "tasks",
+            "column": "location_id"
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_array_relationship",
+      "args": {
+        "source": "default",
+        "table": "time_windows",
+        "name": "tasks",
+        "using": {
+          "foreign_key_constraint_on": {
+            "table": "tasks",
+            "column": "time_window_id"
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_array_relationship",
+      "args": {
+        "source": "default",
+        "table": "time_windows",
+        "name": "recurring_schedules",
+        "using": {
+          "foreign_key_constraint_on": {
+            "table": "recurring_schedules",
+            "column": "time_window_id"
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_array_relationship",
+      "args": {
+        "source": "default",
+        "table": "weather_conditions",
+        "name": "tasks",
+        "using": {
+          "foreign_key_constraint_on": {
+            "table": "tasks",
+            "column": "weather_condition_id"
+          }
+        }
+      }
+    }
+  ]
+}
