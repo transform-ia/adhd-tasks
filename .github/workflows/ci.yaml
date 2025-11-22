@@ -23,6 +23,7 @@ jobs:
       - name: Lint YAML files
         uses: ibiqlik/action-yamllint@v3
         with:
+          config_file: .yamllint
           strict: true
 
       - name: Lint Markdown files
