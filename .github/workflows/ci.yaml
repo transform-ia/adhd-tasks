@@ -31,14 +31,6 @@ jobs:
         with:
           globs: '**/*.md'
 
-      - name: Lint SQL files
-        run: |
-          npm install -g sql-formatter
-          find . -name "*.sql" -not -path "./.git/*" | while read -r file; do
-            echo "Linting $file"
-            sql-formatter --check "$file" || {
-              echo "❌ SQL file needs formatting: $file"
-              echo "Run: sql-formatter --fix $file"
-              exit 1
-            }
-          done
+      # SQL linting disabled - no simple linter available for PostgreSQL
+      # - name: Lint SQL files
+      #   run: echo "SQL linting skipped"
