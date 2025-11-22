@@ -1,0 +1,25 @@
+---
+# Markdownlint configuration
+default: true
+
+# MD013/line-length - Line length
+MD013:
+  line_length: 180
+  code_blocks: false
+  tables: false
+
+# MD029/ol-prefix - Ordered list item prefix
+MD029:
+  style: "ordered"
+
+# MD031/blanks-around-fences - Fenced code blocks should be surrounded by blank lines
+MD031: false
+
+# MD032/blanks-around-lists - Lists should be surrounded by blank lines
+MD032: false
+
+# MD022/blanks-around-headings - Headings should be surrounded by blank lines
+MD022: false
+
+# MD034/no-bare-urls - Bare URL used
+MD034: false
