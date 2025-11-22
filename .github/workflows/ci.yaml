@@ -1,0 +1,43 @@
+---
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Lint JSON files
+        run: |
+          npm install -g jsonlint
+          find . -name "*.json" -not -path "./node_modules/*" -not -path "./.git/*" | xargs -I {} sh -c 'echo "Linting {}" && jsonlint -q {}'
+
+      - name: Lint YAML files
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          strict: true
+
+      - name: Lint Markdown files
+        uses: DavidAnson/markdownlint-cli2-action@v18
+        with:
+          globs: '**/*.md'
+
+      - name: Lint SQL files
+        run: |
+          npm install -g sql-formatter
+          find . -name "*.sql" -not -path "./.git/*" | while read -r file; do
+            echo "Linting $file"
+            sql-formatter --check "$file" || {
+              echo "❌ SQL file needs formatting: $file"
+              echo "Run: sql-formatter --fix $file"
+              exit 1
+            }
+          done
