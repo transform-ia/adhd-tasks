@@ -4,13 +4,12 @@ default: true
 
 # MD013/line-length - Line length
 MD013:
-  line_length: 180
+  line_length: 300
   code_blocks: false
   tables: false
 
 # MD029/ol-prefix - Ordered list item prefix
-MD029:
-  style: "ordered"
+MD029: false
 
 # MD031/blanks-around-fences - Fenced code blocks should be surrounded by blank lines
 MD031: false
